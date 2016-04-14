@@ -1,5 +1,5 @@
 /**
- * Memo with pager アプリのコンテキスト
+ * Memo with Text Search アプリのコンテキスト
  *
  * @module utils/context
  * @author Ippei SUZUKI

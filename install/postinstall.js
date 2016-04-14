@@ -1,10 +1,9 @@
 /**
- * @file Memo with pager アプリのインストール後処理
+ * @file Memo with Text Search アプリのインストール後処理
  *
  * <pre>
  * ・データベース「memo」が無い場合は作成する。
  * ・「memo」に設計文書「_design/memos」が無い場合は作成する。
- * ・セッション保存用データベース「session」を削除＆作成する。
  * </pre>
  *
  * @author Ippei SUZUKI
@@ -35,16 +34,16 @@ var readFunction = function(fs, fileName) {
 }
 
 // 関数を読込み設計文書を作成する。
-var insertDesignDocument = function(db, designDocument) {
+var insertDesignDocument = function(db, doc) {
 	// プロパティに関数をセットする。
 	var fs = require("fs");
-	designDocument.views.list.map = readFunction(fs, 'list');
-	designDocument.indexes.searchText.index = readFunction(fs, 'search-text');
+	doc.views.list.map = readFunction(fs, 'list');
+	doc.indexes.searchText.index = readFunction(fs, 'search-text');
 
 	db.insert(designDocument, function(err) {
 		if (!err) {
-			console.log('設計文書[%s]を作成しました。', designDocument._id);
-			console.log(designDocument);
+			console.log('設計文書[%s]を作成しました。', doc._id);
+			console.log(doc);
 		} else {
 			console.log(err);
 		}

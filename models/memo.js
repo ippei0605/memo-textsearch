@@ -58,16 +58,6 @@ exports.list = function(callback) {
 };
 
 /**
- * メモを取得する。
- *
- * @see db.get 関数
- *      {@link https://github.com/apache/couchdb-nano#dbgetdocname-params-callback}
- */
-exports.get = function(_id, callback) {
-	db.get(_id, callback);
-};
-
-/**
  * メモを保存する。
  *
  * @see db.insert 関数

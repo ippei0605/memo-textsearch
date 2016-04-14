@@ -1,5 +1,5 @@
 /**
- * @file Memo with pager アプリ
+ * @file Memo with Text Search アプリ
  * @author Ippei SUZUKI
  */
 

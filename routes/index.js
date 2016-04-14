@@ -13,27 +13,38 @@ var memo = require('../models/memo');
 var packageJson = require('../package.json');
 
 /** メモ一覧を表示する。 */
+var renderIndex = function(q, res, body) {
+	res.render('index', {
+		"packageJson" : packageJson,
+		"q" : q,
+		"list" : body.rows
+	});
+};
+
+/** メモ一覧を表示する。 */
 exports.list = function(req, res) {
 	var q = req.query.q;
-	console.log('### q=' + q);
-
 	if (typeof q === 'undefined' || q === '') {
 		memo.list(function(err, body) {
-			res.render('index', {
-				"packageJson" : packageJson,
-				"q" : "",
-				"list" : body.rows
-			});
+			renderIndex(q, res, body);
 		});
 	} else {
 		memo.search(q, function(err, body) {
-			res.render('index', {
-				"packageJson" : packageJson,
-				"q" : q,
-				"list" : body.rows
-			});
+			renderIndex(q, res, body);
 		});
 	}
+};
+
+/** メモ一覧を表示する。(検索キーワード継続) */
+var redirectHome = function(req, res) {
+	res.redirect('/?q=' + encodeURIComponent(req.body.q));
+};
+
+/** メモを保存して、メモ一覧を表示する。(検索キーワード継続)。 */
+var saveMemo = function(memo, doc, req, res) {
+	memo.save(doc, function() {
+		redirectHome(req, res);
+	});
 };
 
 /** メモをDBに新規作成して、メモ一覧を表示する。 */
@@ -42,9 +53,7 @@ exports.create = function(req, res) {
 		"content" : req.body.content,
 		"updatedAt" : req.body.updatedAt
 	};
-	memo.save(doc, function() {
-		res.redirect('/');
-	});
+	saveMemo(memo, doc, req, res);
 };
 
 /** メモをDBに更新して、メモ一覧を表示する。 */
@@ -55,14 +64,12 @@ exports.update = function(req, res) {
 		"content" : req.body.content,
 		"updatedAt" : req.body.updatedAt
 	};
-	memo.save(doc, function() {
-		res.redirect('/');
-	});
+	saveMemo(memo, doc, req, res);
 };
 
 /** メモをDBから削除して、現在のページのメモ一覧を表示する。 */
 exports.remove = function(req, res) {
 	memo.remove(req.params._id, req.params._rev, function() {
-		res.redirect('/');
+		redirectHome(req, res);
 	});
 };
