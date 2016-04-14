@@ -1,9 +1,5 @@
 # Memo with Text Search
 
-readme 作成中  
-プログラムは実行可能
-
-
 ## はじめに
 このアプリケーションは、Node.js、Cloudant NoSQL DB でテキスト検索実装の検証のために作成しました。  
 Memo アプリ にテキスト検索機能を付加しました。
