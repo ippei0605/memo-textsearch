@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><%= packageJson.description %></title>
+<title><%= packageJson.name %></title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
@@ -14,16 +14,15 @@
 
 <body>
 	<div class="container">
-		<h1>
-			<%= packageJson.description %> <small>Version <%=
-				packageJson.version %> </small>
+		<h1 class="text-center">
+			<a href="/"><%= packageJson.name %></a>
 		</h1>
+		<p class="text-right"><%= packageJson.description %>, Version <%=
+			packageJson.version %></p>
 
 		<form id="searchFormId" method="GET" action="/">
 			<div class="input-group">
-				<span class="input-group-btn"> <a href="/"
-					class="btn btn-primary">全て表示</a>
-				</span> <input type="text" id="qId" name="q" class="form-control"
+				<input type="text" id="qId" name="q" class="form-control"
 					placeholder="検索キーワード" value="<%=q%>"> <span
 					class="input-group-btn">
 					<button class="btn btn-primary" type="submit">検索</button>

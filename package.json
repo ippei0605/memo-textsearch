@@ -1,5 +1,5 @@
 {
-	"name": "memo-pager",
+	"name": "memo-textsearch",
 	"version": "1.0.0",
 	"description": "Memo with Text Search (Node.js の Webアプリ)",
 	"private": true,
